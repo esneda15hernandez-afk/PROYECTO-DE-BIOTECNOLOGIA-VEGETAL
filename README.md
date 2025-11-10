@@ -10,7 +10,7 @@ Se buscó en Genbak  organism[ORGN]="Psychotria" AND rbcL[gene], se seleccionó 
 
 ## Descarga de las secuencias
 
-![App Screenshot](Descargar%20secuencias%20en%20formato%20FASTA.jpg)!
+![App Screenshot](Descargar%20secuencias%20en%20formato%20FASTA.jpg)
 
 ##  Anexo A — Archivo único de secuencias de la Familia Psychotria sin curar
 
@@ -22,6 +22,9 @@ El archivo FASTA con las secuencias obtenidas de GenBank se encuentra disponible
 
 ## 2. Control de calidad y curación
 Se verificó la longitud y calidad de las secuencias obtenidas, eliminando aquellas que presentaban ambigüedades, regiones incompletas o fragmentos parciales que pudieran comprometer la precisión del alineamiento. En los casos en que se detectaron secuencias duplicadas, se conservó únicamente una muestra representativa por localidad o espécimen, con el fin de evitar redundancias y mantener la representatividad biogeográfica del conjunto de datos.
+
+## Curación manual de datos en MEGA 11
+![Curación de Datos del Anexo A](images/Curacion_de_datos_AnexoA.png)
 
 
 
