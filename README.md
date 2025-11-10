@@ -87,9 +87,8 @@ Nombre del trabajo: Alineamiento final
 
 - Gráficos de resultados (secuencia superior frente a las demás, trazado y alineación) se seleccionaron para facilitar la visualización de la alineación y de regiones problemáticas en el dataset de ADN.
 
-
-
-
+Una vez se obtenga en MFFT versión 7 el alineamiento finasl, sexportó el alineamiento final en FASTA y PHYLIP 4.
+El archivo FAST con las secuencias alineadas se encuentra disponible aquí:
 
 
 
