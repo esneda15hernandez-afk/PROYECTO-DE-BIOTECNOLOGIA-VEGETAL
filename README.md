@@ -1,7 +1,7 @@
 
-# Caracterización molecular y filogenética de poblacional de la familia Psychotria (Rubiaceae)
+# Caracterización molecular y filogenética de poblacional de la familia *Psychotria* (*Rubiaceae*)
 
-El presente proyecto tuvo como objetivo realizar una caracterización filogenética y poblacional del género Psychotria (Familia Rubiaceae), mediante el análisis de secuencias del gen cloroplástico rbcL obtenidas de la base de datos GenBank. Se recopilaron más de 20 accesiones representativas de distintas especies del género, priorizando aquellas de distribución tropical. Las secuencias fueron sometidas a control de calidad para eliminar duplicados, secuencias incompletas y regiones ambiguas. Posteriormente, se realizó un alineamiento múltiple utilizando el programa MAFFT, seguido de la estimación de distancias genéticas y la construcción de árboles filogenéticos bajo el método de Máxima Verosimilitud con soporte bootstrap. Adicionalmente, se aplicaron análisis poblacionales básicos y multivariados (PCA y AMOVA) para evaluar la estructura genética entre especies y regiones geográficas. Los resultados evidencian una clara diferenciación entre clados asociados a distintas zonas tropicales, con altos niveles de divergencia intraespecífica en algunos taxones. Esta información sugiere una historia evolutiva influenciada por procesos de aislamiento geográfico y diversificación ecológica. El estudio contribuye a la comprensión filogenética del género Psychotria y resalta la utilidad de los marcadores cloroplásticos como herramientas para evaluar la diversidad genética y la relación evolutiva entre especies tropicales de Rubiaceae.
+El presente proyecto tuvo como objetivo realizar una caracterización filogenética y poblacional del género *Psychotria* (Familia *Rubiaceae*), mediante el análisis de secuencias del gen cloroplástico rbcL obtenidas de la base de datos GenBank. Se recopilaron más de 20 accesiones representativas de distintas especies del género, priorizando aquellas de distribución tropical. Las secuencias fueron sometidas a control de calidad para eliminar duplicados, secuencias incompletas y regiones ambiguas. Posteriormente, se realizó un alineamiento múltiple utilizando el programa MAFFT, seguido de la estimación de distancias genéticas y la construcción de árboles filogenéticos bajo el método de Máxima Verosimilitud con soporte bootstrap. Adicionalmente, se aplicaron análisis poblacionales básicos y multivariados (PCA y AMOVA) para evaluar la estructura genética entre especies y regiones geográficas. Los resultados evidencian una clara diferenciación entre clados asociados a distintas zonas tropicales, con altos niveles de divergencia intraespecífica en algunos taxones. Esta información sugiere una historia evolutiva influenciada por procesos de aislamiento geográfico y diversificación ecológica. El estudio contribuye a la comprensión filogenética del género Psychotria y resalta la utilidad de los marcadores cloroplásticos como herramientas para evaluar la diversidad genética y la relación evolutiva entre especies tropicales de Rubiaceae.
 Para realizar este proyecto se siguió estos pasos:
 
 ## 1. Selección y descarga
@@ -12,7 +12,7 @@ Se buscó en Genbak  organism[ORGN]="Psychotria" AND rbcL[gene], se seleccionó 
 
 ![App Screenshot](Descargar%20secuencias%20en%20formato%20FASTA.jpg)
 
-##  Anexo A — Archivo único de secuencias de la Familia Psychotria sin curar
+##  Anexo A — Archivo único de secuencias de la Familia *Psychotria* sin curar
 
 El archivo FASTA con las secuencias obtenidas de GenBank se encuentra disponible aquí:
 
@@ -35,10 +35,23 @@ Para el alineamiento de las secuencias curadas se utilizará MAFFT, un programa 
 ![App Screenshot](Cargar%20el%20archivo.jpg)
 
 ## Parámetros de entrada y formato para alineamiento de secuencias
+![App Screenshot](Datos%20de%20entrada.jpg)
+Tipo de secuencias (MAYÚSCULAS / minúsculas): Aminoácido → MAYÚSCULAS; Nucleótido → minúsculas
+**Nota:** Todas las secuencias de ADN como rbcL se ingresarán en minúsculas, para mantener consistencia y facilitar la lectura de MAFFT.
 
+Dirección de las secuencias de nucleótidos: Ajustar la dirección según la primera secuencia
+**Nota:** Esto asegura que todas las secuencias estén orientadas de manera consistente respecto a la primera secuencia, evitando posibles inversiones que afectarían el alineamiento. Es suficientemente preciso para secuencias del mismo marcador.
 
+Orden de salida: Alineado
+**Nota:** Las secuencias en el archivo de salida se ordenarán en el mismo orden que el alineamiento, facilitando la visualización y posteriores análisis filogenéticos.
 
+Longitud del título en formato Clustal: 10
+**Nota:** Solo se usa la primera palabra de cada título como identificador. Esto permite un formato legible y compatible con programas que leen Clustal, sin truncar información crítica de los IDs de GenBank.
 
+Nombre del trabajo: Alineamiento final
+**Nota:** Nombre descriptivo para identificar el archivo de salida, este campo es opcional
+
+## Configuración avanzada
 
 
 
