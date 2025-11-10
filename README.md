@@ -29,10 +29,12 @@ Se verificó la longitud y calidad de las secuencias obtenidas, eliminando aquel
 El archivo FAST con las secuencias obtenidas tras curar manualmente se encuentra disponible aquí:
 [📄 Descargar Secuencias Curadas manualmente (FASTA)](Secuencias%20Curadas%20manualmente.fas
 
-## Alineamiento
+## 3. Alineamiento
 Para el alineamiento de las secuencias curadas se utilizará MAFFT, un programa de alineamiento múltiple de secuencias que permite organizar nucleótidos homólogos de manera precisa y eficiente. El archivo FASTA previamente curado en MEGA será ingresado a MAFFT utilizando parámetros automáticos, lo que generará un alineamiento global considerando homología entre todas las secuencias.
 ## Cargar el archivo Secuencias Curadas manualmente en MAFFT
 ![App Screenshot](Cargar%20el%20archivo.jpg)
+
+## Parámetros de entrada y formato para alineamiento de secuencias
 
 
 
