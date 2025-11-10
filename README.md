@@ -26,6 +26,9 @@ Se verificó la longitud y calidad de las secuencias obtenidas, eliminando aquel
 ## Curación manual de datos en MEGA 11
 ![App Screenshot](Curacion%20manual%20del%20Anexo%20A.jpg)
 
+El archivo FAST con las secuencias obtenidas tras curar manualmente se encuentra disponible aquí:
+
+
 
 
 
