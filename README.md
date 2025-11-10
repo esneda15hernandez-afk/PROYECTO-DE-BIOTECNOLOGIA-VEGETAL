@@ -92,9 +92,9 @@ El archivo FAST con las secuencias alineadas se encuentra disponible aquí:
 [📄 Descargar ANEXO B.1(FASTA)](ANEXO%20B%20.%201.fasta)
 
  Por otro lado, para convertir de archivo FASTA a Phylip se utilizó el siguiente Scrpt en R:
- ## ---------------------------
-## Script R: FASTA -> PHYLIP
-## ---------------------------
+ 
+### Script R: FASTA -> PHYLIP
+
 
 #### Rutas (ajustadas al nombre correcto del archivo)
 ruta_fasta <- "C:\\Users\\USER\\Downloads\\PROYECTO DE BIOTECNOLOGÍA VEGETAL\\ANEXO B.1.fas"
@@ -108,7 +108,7 @@ if (!requireNamespace("ape", quietly = TRUE)) install.packages("ape")
 library(seqinr)
 library(ape)
 
-####Leer archivo FASTA con seqinr
+#### Leer archivo FASTA con seqinr
 seqs_list <- seqinr::read.fasta(file = ruta_fasta, seqtype = "DNA", as.string = FALSE, forceDNAtolower = FALSE)
 
 #### Verificar que se hayan leído secuencias
@@ -130,7 +130,8 @@ dna_bin <- ape::as.DNAbin(seq_matrix)
 ape::write.dna(dna_bin, file = ruta_phylip, format = "sequential", nbcol = -1, colsep = " ")
 
 cat("Conversión completada correctamente.\nArchivo PHYLIP guardado en:\n", ruta_phylip, "\n")
-
+El archivo PHY con las secuencias alineadas se encuentra disponible aquí:
+[📄 Descargar ANEXO B.1(FASTA)](ANEXO%20B%20.%201.fasta)
 
 
 
