@@ -12,6 +12,11 @@ Se buscó en Genbak  organism[ORGN]="Psychotria" AND rbcL[gene], se seleccionó 
 
 ![App Screenshot](Descargar%20secuencias%20en%20formato%20FASTA.jpg)!
 
+##  Anexo A — Archivo único de secuencias de la Familia Psychotria sin curar
+
+El archivo FASTA con las secuencias obtenidas de GenBank se encuentra disponible aquí:
+
+[📄 Descargar ANEXO A (FASTA)](ANEXO%20A.fasta)
 
 
 
