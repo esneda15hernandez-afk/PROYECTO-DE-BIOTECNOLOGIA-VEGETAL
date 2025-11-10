@@ -90,42 +90,43 @@ Nombre del trabajo: Alineamiento final
 Una vez se obtenga en MFFT versión 7 el alineamiento final, se exportó el alineamiento final en FASTA.
 El archivo FAST con las secuencias alineadas se encuentra disponible aquí:
 [📄 Descargar ANEXO B.1(FASTA)](ANEXO%20B%20.%201.fasta)
- Por otro lado, para convertir de archivo FASTA a Phylip se utilizó el siguiente Scrpt en R:
- # ---------------------------
-# Script R: FASTA -> PHYLIP
-# ---------------------------
 
-# Rutas (ajustadas al nombre correcto del archivo)
+ Por otro lado, para convertir de archivo FASTA a Phylip se utilizó el siguiente Scrpt en R:
+ ## ---------------------------
+## Script R: FASTA -> PHYLIP
+## ---------------------------
+
+#### Rutas (ajustadas al nombre correcto del archivo)
 ruta_fasta <- "C:\\Users\\USER\\Downloads\\PROYECTO DE BIOTECNOLOGÍA VEGETAL\\ANEXO B.1.fas"
 ruta_phylip <- "C:\\Users\\USER\\Downloads\\PROYECTO DE BIOTECNOLOGÍA VEGETAL\\ANEXO_B1.phy"
 
-# Instalar paquetes si no los tienes
+#### Instalar paquetes si no los tienes
 if (!requireNamespace("seqinr", quietly = TRUE)) install.packages("seqinr")
 if (!requireNamespace("ape", quietly = TRUE)) install.packages("ape")
 
-# Cargar librerías
+#### Cargar librerías
 library(seqinr)
 library(ape)
 
-# Leer archivo FASTA con seqinr
+####Leer archivo FASTA con seqinr
 seqs_list <- seqinr::read.fasta(file = ruta_fasta, seqtype = "DNA", as.string = FALSE, forceDNAtolower = FALSE)
 
-# Verificar que se hayan leído secuencias
+#### Verificar que se hayan leído secuencias
 if (length(seqs_list) == 0) stop("No se leyó ninguna secuencia. Verifica la ruta o el formato del archivo.")
 
-# Verificar longitudes iguales
+#### Verificar longitudes iguales
 lengths <- sapply(seqs_list, length)
 if (length(unique(lengths)) != 1) {
   stop("ERROR: No todas las secuencias tienen la misma longitud. Longitudes encontradas:\n",
        paste(names(lengths), lengths, sep = ": ", collapse = "; "))
 }
 
-# Convertir a matriz y luego a formato DNAbin
+#### Convertir a matriz y luego a formato DNAbin
 seq_matrix <- do.call(rbind, lapply(seqs_list, function(v) toupper(as.character(v))))
 rownames(seq_matrix) <- names(seqs_list)
 dna_bin <- ape::as.DNAbin(seq_matrix)
 
-# Exportar a formato PHYLIP
+#### Exportar a formato PHYLIP
 ape::write.dna(dna_bin, file = ruta_phylip, format = "sequential", nbcol = -1, colsep = " ")
 
 cat("Conversión completada correctamente.\nArchivo PHYLIP guardado en:\n", ruta_phylip, "\n")
