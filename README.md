@@ -131,7 +131,7 @@ ape::write.dna(dna_bin, file = ruta_phylip, format = "sequential", nbcol = -1, c
 
 cat("Conversión completada correctamente.\nArchivo PHYLIP guardado en:\n", ruta_phylip, "\n")
 El archivo PHY con las secuencias alineadas se encuentra disponible aquí:
-[📄 Descargar ANEXO B.1(FASTA)](ANEXO%20B%20.%201.fasta)
+[📄 Descargar ANEXO B.1(FASTA)](ANEXO%20B%20.%202.phy) 
 
 
 
