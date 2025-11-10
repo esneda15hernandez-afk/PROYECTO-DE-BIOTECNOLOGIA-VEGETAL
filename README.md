@@ -24,7 +24,7 @@ El archivo FASTA con las secuencias obtenidas de GenBank se encuentra disponible
 Se verificó la longitud y calidad de las secuencias obtenidas, eliminando aquellas que presentaban ambigüedades, regiones incompletas o fragmentos parciales que pudieran comprometer la precisión del alineamiento. En los casos en que se detectaron secuencias duplicadas, se conservó únicamente una muestra representativa por localidad o espécimen, con el fin de evitar redundancias y mantener la representatividad biogeográfica del conjunto de datos.
 
 ## Curación manual de datos en MEGA 11
-![App Screenshot](Secuencias%20Curadas%20manualmente.jpg)
+![App Screenshot](Descargar%20Secuencias%20Curadas%20manualmente.jpg)
 
 
 
