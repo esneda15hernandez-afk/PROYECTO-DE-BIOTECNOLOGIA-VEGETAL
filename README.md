@@ -57,7 +57,13 @@ Nombre del trabajo: Alineamiento final
 **Nota:** Nombre descriptivo para identificar el archivo de salida, este campo es opcional
 
 ## Configuración avanzada
+![App Screenshot](configuracion%20avanzada.jpg)
 
+![App Screenshot](Segmentos%20no%20relaciados.jpg)
+
+![App Screenshot](Homológos.jpg)
+
+![App Screenshot](Otros%20parametros.jpg)
 
 
 
