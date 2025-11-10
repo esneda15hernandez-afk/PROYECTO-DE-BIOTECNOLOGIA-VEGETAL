@@ -27,6 +27,7 @@ Se verificó la longitud y calidad de las secuencias obtenidas, eliminando aquel
 ![App Screenshot](Curacion%20manual%20del%20Anexo%20A.jpg)
 
 El archivo FAST con las secuencias obtenidas tras curar manualmente se encuentra disponible aquí:
+[📄 Descargar Secuencias Curadas manualmente (FASTA)](Secuencias%20Curadas%20manualmente.fas)
 
 
 
