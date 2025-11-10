@@ -59,7 +59,8 @@ Nombre del trabajo: Alineamiento final
 ## Configuración avanzada
 ![App Screenshot](configuracion%20avanzada.jpg)
 
-![App Screenshot](Segmentos%20no%20relaciados.jpg)
+![App Screenshot](Segmentos%20no%20relacionados.jpg)
+
 
 ![App Screenshot](Homológos.jpg)
 
