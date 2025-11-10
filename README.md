@@ -58,31 +58,34 @@ Nombre del trabajo: Alineamiento final
 
 ## Configuración avanzada
 ### Configuración automática
+
 ![App Screenshot](configuracion%20avanzada.jpg
-Configuración avanzada: se seleccionó “Automático” porque MAFFT elige la estrategia óptima según el número de secuencias y el tamaño del dataset, equilibrando velocidad y precisión.
+
+- Configuración avanzada: se seleccionó “Automático” porque MAFFT elige la estrategia óptima según el número de secuencias y el tamaño del dataset, equilibrando velocidad y precisión.
 
 ### Método de alineamiento
 ![App Screenshot](Segmentos%20no%20relacionados.jpg)
-Método de alineamiento: se eligió "Intenta alinear las regiones con huecos de todos modos” porque algunas secuencias presentan insertos o deleciones largas y se busca mejorar la homología en regiones con huecos.
+
+- Método de alineamiento: se eligió "Intenta alinear las regiones con huecos de todos modos” porque algunas secuencias presentan insertos o deleciones largas y se busca mejorar la homología en regiones con huecos.
 
 ### Parámetros
 ![App Screenshot](Otros%20parametros.jpg)
 
-Matriz de puntuación (BLOSUM62 / 200PAM κ=2) se eligió por ser la predeterminada estándar, adecuada para proteínas y ADN divergente respectivamente, asegurando una alineación confiable.
+- Matriz de puntuación (BLOSUM62 / 200PAM κ=2) se eligió por ser la predeterminada estándar, adecuada para proteínas y ADN divergente respectivamente, asegurando una alineación confiable.
 
-Penalización por apertura de hueco (1.53): se dejó por defecto para equilibrar la introducción de huecos sin sobre-penalizar regiones con insertos.
+- Penalización por apertura de hueco (1.53): se dejó por defecto para equilibrar la introducción de huecos sin sobre-penalizar regiones con insertos.
 
-Valor de desplazamiento (0.0): se mantuvo predeterminado para evitar movimientos locales innecesarios que compliquen la alineación.
+- Valor de desplazamiento (0.0): se mantuvo predeterminado para evitar movimientos locales innecesarios que compliquen la alineación.
 
-Tratamiento de N en nucleótidos (cero): se escogió para que las bases desconocidas no afecten la puntuación de alineación.
+- Tratamiento de N en nucleótidos (cero): se escogió para que las bases desconocidas no afecten la puntuación de alineación.
 
 Árbol guía (UPGMA):se dejó por defecto, ya que proporciona un orden inicial eficiente para el alineamiento progresivo.
 ### Homólogos de Mafft
 ![App Screenshot](Homológos.jpg)
 
-Homólogos de MAFFT (desactivado) porque solo se requiere alinear las secuencias de entrada sin incorporar secuencias externas.
+- Homólogos de MAFFT (desactivado) porque solo se requiere alinear las secuencias de entrada sin incorporar secuencias externas.
 
-Gráficos de resultados (secuencia superior frente a las demás, trazado y alineación) se seleccionaron para facilitar la visualización de la alineación y de regiones problemáticas en el dataset de ADN.
+- Gráficos de resultados (secuencia superior frente a las demás, trazado y alineación) se seleccionaron para facilitar la visualización de la alineación y de regiones problemáticas en el dataset de ADN.
 
 
 
