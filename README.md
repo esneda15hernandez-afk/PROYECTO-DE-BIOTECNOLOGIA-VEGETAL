@@ -9,11 +9,10 @@ Se buscó en Genbak  organism[ORGN]="Psychotria" AND rbcL[gene], se seleccionó 
 
 ## Descarga de las secuencias
 
-![App Screenshot](Descargar%20secuencias%20en%20formato%20FASTA.jpg)!
+![App Screenshot](Descargar%20secuencias%20en%20formato%20FASTA.jpg)
 
 
 
-## Captura del proceso
 
 ![Descargar secuencias en formato FASTA](Descargar%20secuencias%20en%20formato%20FASTA.jpg)!
 
