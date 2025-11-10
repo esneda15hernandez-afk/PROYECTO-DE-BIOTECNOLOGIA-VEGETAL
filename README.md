@@ -37,18 +37,23 @@ Para el alineamiento de las secuencias curadas se utilizará MAFFT, un programa 
 ## Parámetros de entrada y formato para alineamiento de secuencias
 ![App Screenshot](Datos%20de%20entrada.jpg)
 Tipo de secuencias (MAYÚSCULAS / minúsculas): Aminoácido → MAYÚSCULAS; Nucleótido → minúsculas
+
 **Nota:** Todas las secuencias de ADN como rbcL se ingresarán en minúsculas, para mantener consistencia y facilitar la lectura de MAFFT.
 
 Dirección de las secuencias de nucleótidos: Ajustar la dirección según la primera secuencia
+
 **Nota:** Esto asegura que todas las secuencias estén orientadas de manera consistente respecto a la primera secuencia, evitando posibles inversiones que afectarían el alineamiento. Es suficientemente preciso para secuencias del mismo marcador.
 
 Orden de salida: Alineado
+
 **Nota:** Las secuencias en el archivo de salida se ordenarán en el mismo orden que el alineamiento, facilitando la visualización y posteriores análisis filogenéticos.
 
 Longitud del título en formato Clustal: 10
+
 **Nota:** Solo se usa la primera palabra de cada título como identificador. Esto permite un formato legible y compatible con programas que leen Clustal, sin truncar información crítica de los IDs de GenBank.
 
 Nombre del trabajo: Alineamiento final
+
 **Nota:** Nombre descriptivo para identificar el archivo de salida, este campo es opcional
 
 ## Configuración avanzada
