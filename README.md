@@ -59,7 +59,7 @@ Nombre del trabajo: Alineamiento final
 ## Configuración avanzada
 ### Configuración automática
 
-![App Screenshot](configuracion%20avanzada.jpg
+![App Screenshot](configuracion%20avanzada.jpg)
 
 - Configuración avanzada: se seleccionó “Automático” porque MAFFT elige la estrategia óptima según el número de secuencias y el tamaño del dataset, equilibrando velocidad y precisión.
 
