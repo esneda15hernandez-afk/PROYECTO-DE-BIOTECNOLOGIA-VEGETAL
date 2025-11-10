@@ -7,13 +7,12 @@ Para realizar este proyecto se siguió estos pasos:
 ## 1. Selección y descarga
 Se buscó en Genbak  organism[ORGN]="Psychotria" AND rbcL[gene], se seleccionó 26 epsecies asegurandóse que tengan una distribucción tropical y se descargó todas en un sólo archivo en formato FASTA.
 
+
 ## Descarga de las secuencias
 
-![App Screenshot](Descargar%20secuencias%20en%20formato%20FASTA.jpg)
+![App Screenshot](Descargar%20secuencias%20en%20formato%20FASTA.jpg)!
 
 
 
-
-![Descargar secuencias en formato FASTA](Descargar%20secuencias%20en%20formato%20FASTA.jpg)!
 
 
