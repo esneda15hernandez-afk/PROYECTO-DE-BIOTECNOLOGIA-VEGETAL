@@ -137,13 +137,23 @@ El archivo PHY con las secuencias alineadas se encuentra disponible aquí:
 
 Se estimó las distancias genéticas (p-distance ) con MEGA  11 y se exportó las matrices en Excel
 
-### Estimación de distancias genéticas en MEGA 11
+#### Estimación de distancias genéticas en MEGA 11
 
 ![App Screenshot](calculo%20de%20distancia.jpg)
 
-El archivo PHY con las secuencias alineadas se encuentra disponible aquí:
-[📄 Descargar ANEXOC (xlxs)](ANEXO%20C.xlsx) 
+La matriz de las distancias genéticas se encuentra disponible aquí:
+[📄 Descargar ANEXOC (xlxs)](ANEXO%20C.xlsx)
 
+### Creación del árbol filogenético
+
+Se construyó un árbol filogenético con MEGA 11: ML y NJ con Bootstrap y se guardó el árbol en Newick.
+
+![App Screenshot](calculo%20de%20distancia.jpg)
+
+Para construir el arból filógenetico es importante guardar el ANEXO B.1(fasta) en formato MEGA, se lo abre con MEGA 11 y se va a la opción de Analysis, después a Phylogeny opción Construct/Test ML o NJ y se abre una interfaz como la que se muestra en la figura de arriba, finalmemnte se modifica la parte de test phylogeny y se coloca el método bootstrao >1000 secuencias como se observa en la captura de imagén y el programa dará un árbol filogenético que posteriormente se descargará en forfamo Newick.
+
+El árbol filogenético se encuentra disponible aquí:
+[📄 Descargar ANEXOC (xlxs)](ANEXO%20C.xlsx)
 
 
 
