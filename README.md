@@ -130,10 +130,19 @@ dna_bin <- ape::as.DNAbin(seq_matrix)
 ape::write.dna(dna_bin, file = ruta_phylip, format = "sequential", nbcol = -1, colsep = " ")
 
 cat("Conversión completada correctamente.\nArchivo PHYLIP guardado en:\n", ruta_phylip, "\n")
+
 El archivo PHY con las secuencias alineadas se encuentra disponible aquí:
 [📄 Descargar ANEXO B.1(FASTA)](ANEXO%20B%20.%202.phy) 
+## 4.Análisis filogenético 
 
+Se estimó las distancias genéticas (p-distance ) con MEGA  11 y se exportó las matrices en Excel
 
+### Estimación de distancias genéticas en MEGA 11
+
+![App Screenshot](calculo%20de%20distancia.jpg)
+
+El archivo PHY con las secuencias alineadas se encuentra disponible aquí:
+[📄 Descargar ANEXOC (xlxs)](ANEXO%20C.xlxs) 
 
 
 
