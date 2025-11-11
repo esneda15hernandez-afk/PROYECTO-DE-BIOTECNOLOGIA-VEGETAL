@@ -142,7 +142,7 @@ Se estimó las distancias genéticas (p-distance ) con MEGA  11 y se exportó la
 ![App Screenshot](calculo%20de%20distancia.jpg)
 
 El archivo PHY con las secuencias alineadas se encuentra disponible aquí:
-[📄 Descargar ANEXOC (xlxs)](ANEXO%20C.xlxs) 
+[📄 Descargar ANEXOC (xlxs)](ANEXO%20C.xlsx) 
 
 
 
