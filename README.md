@@ -100,7 +100,7 @@ El archivo FAST con las secuencias alineadas se encuentra disponible aquí:
 ruta_fasta <- "C:\\Users\\USER\\Downloads\\PROYECTO DE BIOTECNOLOGÍA VEGETAL\\ANEXO B.1.fas"
 ruta_phylip <- "C:\\Users\\USER\\Downloads\\PROYECTO DE BIOTECNOLOGÍA VEGETAL\\ANEXO_B1.phy"
 
-#### Instalar paquetes si no los tienes
+#### Instalar paquetes 
 if (!requireNamespace("seqinr", quietly = TRUE)) install.packages("seqinr")
 if (!requireNamespace("ape", quietly = TRUE)) install.packages("ape")
 
@@ -154,6 +154,383 @@ Para construir el arból filógenetico es importante guardar el ANEXO B.1(fasta)
 
 El árbol filogenético se encuentra disponible aquí:
 [📄 Descargar Arbol filogenético (xlxs)](ARBOL%20NJ.pgn)
+## 5. Análisis poblacional / estadística
+Se realizó un análisis de frecuencia de haplotipos, diversidad haplotípica y diversidad nucleótidica en Rstudio. Posteriormente se realizó un análisis PCoA/PCA sobre matriz de distancias genéticas en R studio utilizando los paquetes vegan y ade4, un clustering (UPGMA/ward), y AMOVA para evaluar estructura entre grupos geográficos utilizando los paquetes Arlequin o poppr y finalmente se calculó soportes estadísticos p-values y ΦST 
+Para el aálisis denético se usó el siguiente Script
+
+### A. ANÁLISIS GENÉTICO: HAPLOTIPOS, Hd Y π CON CORRECCIÓN DE NOMBRES
+
+if(!require(ape)) install.packages("ape")
+if(!require(pegas)) install.packages("pegas")
+
+library(ape)
+library(pegas)
+
+
+##### 1. Leer archivo FASTA y limpiar nombres
+
+ruta <- "C:/Users/USER/Downloads/PROYECTO DE BIOTECNOLOGÍA VEGETAL/ANEXO B.1.fas"
+
+alignment <- read.dna(ruta, format = "fasta")
+
+##### Limpiar nombres de secuencias 
+rownames(alignment) <- gsub(" ", "_", rownames(alignment))
+rownames(alignment) <- gsub("[^A-Za-z0-9_]", "", rownames(alignment))
+
+##### Verificar lectura correcta
+cat("Secuencias cargadas correctamente:", nrow(alignment), "secuencias de", ncol(alignment), "bp.\n\n")
+
+
+##### 2. Identificar haplotipos
+
+haps <- haplotype(alignment)
+
+
+##### 3. Calcular frecuencias de haplotipos
+
+frecuencias <- haploFreq(haps)
+
+
+##### 4. Calcular diversidad haplotípica (Hd) y nucleotídica (π)
+
+Hd <- hap.div(alignment)
+Pi <- nuc.div(alignment)
+
+
+##### 5. Crear tabla resumen
+
+tabla_resumen <- data.frame(
+  Numero_de_Secuencias = nrow(alignment),
+  Numero_de_Haplotipos = length(haps),
+  Diversidad_Haplotipica_Hd = round(Hd, 4),
+  Diversidad_Nucleotidica_Pi = round(Pi, 4)
+)
+
+
+##### 6. Mostrar resultados
+
+cat("RESULTADOS DEL ANÁLISIS GENÉTICO\n")
+print(tabla_resumen)
+cat("\nFrecuencia de haplotipos:\n")
+print(frecuencias)
+
+##### 7.Guardar tabla en CSV
+write.csv(tabla_resumen,
+          "C:/Users/USER/Downloads/PROYECTO DE BIOTECNOLOGÍA VEGETAL/Resumen_Haplotipos.csv",
+          row.names = FALSE)
+          
+### B. PCOA BASADO EN DISTANCIAS
+
+
+##### CARGAR LIBRERÍAS
+
+library(readxl)
+library(vegan)
+library(ape)
+library(poppr)
+library(pegas)
+library(calibrate)
+
+
+##### LEER MATRIZ DE DISTANCIAS DESDE EXCEL
+
+ruta <- "C:/Users/USER/Downloads/PROYECTO DE BIOTECNOLOGÍA VEGETAL/ANEXO C.xlsx"
+
+##### Leer hoja 1 
+dist_data <- read_excel(ruta, sheet = 1)
+
+##### Si la primera columna no es numérica, se toma como nombres de muestra
+if (!is.numeric(dist_data[[1]])) {
+  dist_data <- as.data.frame(dist_data)   # convertir a data.frame
+  rownames(dist_data) <- dist_data[[1]]   # usar primera columna como nombres
+  dist_data <- dist_data[, -1]   }
+
+##### Convertir el resto a numérico
+dist_matrix <- as.matrix(sapply(dist_data, as.numeric))
+
+
+##### Asegurar que filas y columnas tengan los mismos nombres
+rownames(dist_matrix) <- rownames(dist_data)
+colnames(dist_matrix) <- rownames(dist_data)
+
+##### Verificar que la matriz sea cuadrada
+if (nrow(dist_matrix) != ncol(dist_matrix)) {
+  stop("⚠ La matriz no es cuadrada. Revisa tu archivo Excel.")
+}
+
+##### Convertir a objeto de distancia
+dist_matrix <- as.dist(dist_matrix)
+
+
+#####  ANÁLISIS DE COORDENADAS PRINCIPALES (PCoA)
+
+pcoa_result <- cmdscale(dist_matrix, k = 2, eig = TRUE)
+
+##### Mostrar coordenadas de las muestras
+cat("\n=== COORDENADAS DE LAS MUESTRAS ===\n")
+print(round(pcoa_result$points, 4))
+
+##### Calcular porcentaje de varianza explicada
+var_exp <- round((pcoa_result$eig / sum(pcoa_result$eig)) * 100, 2)
+cat("\n=== VARIANZA EXPLICADA (%) ===\n")
+print(var_exp[1:23])
+
+
+##### GRAFICAR PCoA 
+
+labels_cortos <- substr(rownames(pcoa_result$points), 1, 10)
+colores <- rainbow(nrow(pcoa_result$points))
+
+##### Abre una nueva ventana de gráficos 
+if (dev.cur() == 1) windows()  # usa quartz() en Mac
+windows()  
+##### Graficar PCoA
+plot(pcoa_result$points,
+     pch = 19, col = colores,
+     xlab = paste0("Eje 1 (", var_exp[1], "%)"),
+     ylab = paste0("Eje 2 (", var_exp[2], "%)"),
+     main = "PCoA basado en matriz de distancias genéticas")
+### C.  CLUSTERING GENÉTICO (UPGMA y WARD) 
+
+#####  Cargar librerías
+library(readxl)
+library(vegan)
+library(cluster)
+library(dendextend)
+
+#####  Ruta del archivo
+ruta <- "C:/Users/USER/Downloads/PROYECTO DE BIOTECNOLOGÍA VEGETAL/ANEXO C.xlsx"
+
+#####  Leer la hoja 1 (ajusta si es otra)
+datos <- read_excel(ruta, sheet = 1)
+
+##### Revisar los nombres de las columnas
+cat("\n=== NOMBRES DE COLUMNAS ===\n")
+print(names(datos))
+
+##### Si la primera columna son los nombres de las muestras, se usa como rownames
+if (!is.numeric(dist_data[[1]])) {
+  dist_data <- as.data.frame(dist_data)   # convertir a data.frame
+  rownames(dist_data) <- dist_data[[1]]   # usar primera columna como nombres
+  dist_data <- dist_data[, -1]   }
+
+
+##### Convertir todo a numérico (reemplazando texto o celdas vacías)
+datos_num <- as.data.frame(sapply(datos, as.numeric))
+rownames(datos_num) <- rownames(datos)
+
+##### Eliminar filas/columnas vacías
+datos_num <- datos_num[complete.cases(datos_num), ]
+datos_num <- datos_num[, colSums(is.na(datos_num)) == 0]
+
+##### Confirmar estructura final
+cat("\n=== MATRIZ FINAL SIN NA ===\n")
+print(dim(datos_num))
+
+
+#####  Calcular matriz de distancias genéticas
+
+dist_matrix <- vegdist(datos_num, method = "euclidean")
+
+##### Verificar si hay valores infinitos o NA
+if (any(is.na(dist_matrix))) stop("Hay NA en la matriz de distancias. Revisa tu archivo Excel.")
+
+hc_upgma <- hclust(dist_matrix, method = "average")
+plot(hc_upgma, main = ".", xlab = "", sub = "")
+
+hc_ward <- hclust(dist_matrix, method = "ward.D2")
+plot(hc_ward, main = "Clustering Ward (matriz de distancias)", xlab = "", sub = "")
+##### Aumentar el área del gráfico antes de graficar
+par(mar = c(10, 4, 4, 2))  # más espacio inferior
+
+plot(hc_upgma, 
+     main = ".", 
+     xlab = "", sub = "",
+     cex = 0.8, hang = -1, las = 2)
+ ### D. AMOVA P-VALUE Y ΦST
+ #### Cargar librerías
+library(ape)
+library(poppr)
+library(pegas)
+library(ade4)
+
+####  Cargar el alineamiento FASTA
+
+ruta_fasta <- "C:/Users/USER/Downloads/PROYECTO DE BIOTECNOLOGÍA VEGETAL/ANEXO B.1.fas"
+
+alignment <- read.dna(ruta_fasta, format = "fasta")
+
+
+#### Crear tabla de metadatos 
+
+metadata <- data.frame(
+  id = names(alignment),
+  nombre = c(
+    "Psychotria homalosperma",
+    "Psychotria viridiflora",
+    "Psychotria limba",
+    "Psychotria longituba",
+    "Psychotria michelii",
+    "Psychotria myriantha",
+    "Psychotria rufofils",
+    "Psychotria subobliqua",
+    "Psychotria carthagenensis",
+    "Psychotria hoffmannseggiana",
+    "Psychotria ligustrifolia",
+    "Psychotria poeppigiana_1",
+    "Psychotria poeppigiana_2",
+    "Psychotria kirkii",
+    "Psychotria colorata",
+    "Psychotria tenuifolia_1",
+    "Psychotria tenuifolia_2",
+    "Psychotria lundellii",
+    "Psychotria mapourioides",
+    "Psychotria trichotoma",
+    "Psychotria tucheri",
+    "Psychotria sepensis",
+    "Psychotria asiatica"
+  ),
+  origen = c(
+    "Asia", "Asia", "África", "África", "América", "América", "América", "América",
+    "América", "América", "América", "América", "América", "África", "América",
+    "América", "América", "América", "América", "América", "África", "Asia", "Asia"
+  )
+)
+
+#### Verificar estructura
+print(metadata)
+
+
+####  Alinear nombres entre FASTA y metadatos
+
+#### Asegurar que las secuencias coincidan con los IDs del metadata
+alignment <- alignment[names(alignment) %in% metadata$id]
+metadata <- metadata[metadata$id %in% names(alignment), ]
+
+
+#### Convertir a objeto genético
+
+genind_obj <- DNAbin2genind(alignment)
+pop(genind_obj) <- as.factor(metadata$origen)
+
+
+####  Análisis AMOVA
+
+amova_result <- poppr.amova(genind_obj, ~origen)
+print(amova_result)
+
+
+#### Test de permutaciones
+
+set.seed(123)
+amova_test <- randtest(amova_result, nrepet = 999)
+print(amova_test)
+#### Revisar nombres disponibles en el resultado
+cat("\nEstructura del objeto AMOVA:\n")
+print(names(amova_result))
+
+#### Intentar extraer ΦST y p-value según formato
+phi_st <- NA
+p_value <- NA
+
+if ("statphi" %in% names(amova_result)) {
+  phi_st <- amova_result$statphi
+}
+if ("pvalue" %in% names(amova_result)) {
+  p_value <- amova_result$pvalue
+}
+
+#### Si no existen, buscar en sublistas
+if (is.list(amova_result$tab)) {
+  if ("Phi.ST" %in% colnames(amova_result$tab)) {
+    phi_st <- amova_result$tab["Among groups", "Phi.ST"]
+  }
+}
+
+
+#### Imprimir resultados
+
+
+if (!is.na(phi_st)) {
+  cat("ΦST =", round(phi_st, 4), "\n")
+} else {
+  cat("ΦST no disponible en el objeto.\n")
+}
+
+if (!is.na(p_value)) {
+  cat("p-value =", round(p_value, 4), "\n")
+} else {
+  cat("p-value no disponible en el objeto.\n")
+}
+
+cat("============================\n")
+### E. VISUALIZACIONES
+library(ape)
+library(seqinr)
+
+##### Leer alineamiento
+NUEVO <- "C:\\Users\\USER\\Downloads\\PROYECTO DE BIOTECNOLOGÍA VEGETAL\\ANEXO x fas"
+alignment <- read.dna("ANEXO x fas", format = "fasta")
+
+
+
+##### Mostrar nombres originales
+cat("Nombres originales:\n")
+print(rownames(alignment))
+
+rownames(alignment) <- sapply(strsplit(rownames(alignment), "_"), `[`, 1)
+rownames(alignment) <- substr(rownames(alignment), 1, 11)
+##### Verifica los nuevos nombres
+cat("\nNombres modificados (solo código):\n")
+print(rownames(alignment))
+
+##### Graficar alineamiento 
+par(mar = c(2, 10, 3, 1)) 
+image.DNAbin(
+  alignment[, 1:60],
+  cex.lab = 0.8,
+  cex.axis = 0.8
+)
+#### MATRIZ DE DISTANCIAS GENÉTICAS
+library(ape)
+library(pegas)
+library(adegenet)
+library(poppr)
+library(ggplot2)
+library(reshape2)
+library(igraph)
+
+##### Calcular matriz de distancias genéticas
+dist_matrix <- dist.dna(alignment, model = "K80")
+
+##### Convertir a formato largo
+dist_df <- as.matrix(dist_matrix)
+heat_df <- melt(dist_df)
+
+##### Graficar heatmap con texto en negrita y mayor tamaño
+ggplot(heat_df, aes(Var1, Var2, fill = value)) +
+  geom_tile() +
+  scale_fill_gradient(low = "white", high = "purple") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1,
+                               face = "bold", size = 10),
+    axis.text.y = element_text(face = "bold", size = 10)
+  ) +
+  labs(title = "Matriz de distancias genéticas", fill = "Distancia")
+  
+### RED DE HAPLOTIPOS
+haps <- haplotype(alignment)
+net <- haploNet(haps)
+
+##### Graficar la red de haplotipos
+plot(net, size = attr(net, "freq"), scale.ratio = 0.5,
+     main = "Red de haplotipos (pegas)")
+legend("topright", legend = "Cada nodo = haplotipo",
+       bty = "n")
+
+
+
 
 
 
